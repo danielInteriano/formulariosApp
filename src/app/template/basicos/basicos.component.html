@@ -2,7 +2,7 @@
 <hr />
 <div class="row">
   <div class="col">
-    <form (ngSubmit)="guardar(miFormulario)" #miFormulario="ngForm">
+    <form (ngSubmit)="guardar()" #miFormulario="ngForm">
       <!--Nombre del producto-->
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label"> Producto </label>
@@ -13,9 +13,12 @@
             name="producto"
             ngModel
             required
+            minlength="3"
             placeholder="Nombre del producto"
           />
-          <span class="form-text text-danger">Debe ser de 3 letras</span>
+          <span class="form-text text-danger" *ngIf="validarNombreProducto()"
+            >Debe ser de 3 letras</span
+          >
         </div>
       </div>
 
@@ -31,6 +34,9 @@
             required
             placeholder="Precio del producto"
           />
+          <span class="form-text text-danger" *ngIf="validarPrecioProducto()"
+            >El precio debe ser mayor a cero.</span
+          >
         </div>
       </div>
 
@@ -41,8 +47,10 @@
           <input
             type="text"
             class="form-control"
-            name="existencia"
             ngModel
+            name="existencia"
+            existenciaMinima
+            [minimo]="0"
             required
             placeholder="Existencias del producto"
           />
@@ -52,7 +60,11 @@
       <!--Boton del formulario para submit-->
       <div class="row">
         <div class="col">
-          <button type="submit" class="btn btn-primary btn-md float-end">
+          <button
+            type="submit"
+            class="btn btn-primary btn-md float-end"
+            [disabled]="miFormulario.invalid"
+          >
             Guardar
           </button>
         </div>
