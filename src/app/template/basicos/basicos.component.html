@@ -2,7 +2,7 @@
 <hr />
 <div class="row">
   <div class="col">
-    <form (ngSubmit)="guardar()" #miFormulario="ngForm">
+    <form (ngSubmit)="guardar()" #miFormulario="ngForm" autocomplete="off">
       <!--Nombre del producto-->
       <div class="mb-3 row">
         <label class="col-sm-3 col-form-label"> Producto </label>
@@ -11,7 +11,7 @@
             type="text"
             class="form-control"
             name="producto"
-            ngModel
+            [ngModel]="valoresFormulario.producto"
             required
             minlength="3"
             placeholder="Nombre del producto"
@@ -30,7 +30,7 @@
             type="number"
             class="form-control"
             name="precio"
-            ngModel
+            [ngModel]="valoresFormulario.precio"
             required
             placeholder="Precio del producto"
           />
@@ -45,9 +45,9 @@
         <label class="col-sm-3 col-form-label"> Existencia </label>
         <div class="col-sm-9">
           <input
-            type="text"
+            type="number"
             class="form-control"
-            ngModel
+            [ngModel]="valoresFormulario.existencia"
             name="existencia"
             existenciaMinima
             [minimo]="0"
