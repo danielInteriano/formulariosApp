@@ -11,7 +11,7 @@
           type="radio"
           value="F"
           [(ngModel)]="persona.genero"
-          name="radioGenero"
+          name="genero"
           id="radioFemenino"
           required
         />
@@ -23,7 +23,7 @@
           value="M"
           [(ngModel)]="persona.genero"
           class="form-check-input"
-          name="radioGenero"
+          name="genero"
           id="radioMasculino"
           required
         />
@@ -76,17 +76,9 @@
   <!--Botón submit-->
   <div class="row mb-3">
     <div class="col-sm-12">
-      <button class="btn btn-primary float-end" [disabled]="formulario.invalid">
+      <button class="btn btn-primary float-end" (click)="guardar()">
         Guardar
       </button>
     </div>
   </div>
 </form>
-
-<h3>Valor del formulario</h3>
-<pre>{{ formulario.value | json }}</pre>
-<br />
-<h3>Valido</h3>
-<pre>{{ formulario.valid }}</pre>
-<hr />
-<h3>Condiciones:</h3>

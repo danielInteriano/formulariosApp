@@ -8,6 +8,7 @@ import { ExistenciaMinimaDirective } from './directives/existencia-minima.direct
 import { SwitchesComponent } from './switches/switches.component';
 import { TemplateRoutingModule } from './template-routing.module';
 
+
 @NgModule({
   declarations: [
     SwitchesComponent,
