@@ -66,6 +66,5 @@ export class DinamicosComponent {
   //metodo para borrar un juego de la lista
   borrarFavorito(indice: number) {
     this.arrayFavoritos.removeAt(indice);
-    console.log(this.formulario.value);
   }
 }
