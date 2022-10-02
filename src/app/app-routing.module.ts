@@ -14,6 +14,11 @@ const routes: Routes = [
       import('./template/template.module').then((m) => m.TemplateModule),
   },
   {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth-menu.module').then((m) => m.AuthMenuModule),
+  },
+  {
     path: 'error404',
     component: Error404Component,
   },
