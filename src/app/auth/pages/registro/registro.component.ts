@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { EmailValidatorService } from 'src/app/shared/validator/email-validator.service';
 import { ValidatorService } from 'src/app/shared/validator/validator.service';
 
 @Component({
@@ -28,6 +29,7 @@ export class RegistroComponent implements OnInit {
           Validators.required,
           Validators.pattern(this.validatorService.emailPatron),
         ],
+        [this.emailValidator],
       ],
       usuario: [
         '',
@@ -38,14 +40,15 @@ export class RegistroComponent implements OnInit {
     },
     {
       validators: [
-        this.validatorService.passwordIguales('password1', 'password2'),
+        this.validatorService.compararPassword('password1', 'password2'),
       ],
     }
   );
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService
+    private validatorService: ValidatorService,
+    private emailValidator: EmailValidatorService
   ) {}
 
   ngOnInit(): void {
