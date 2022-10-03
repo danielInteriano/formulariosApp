@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  emailPatron,
-  obtenerUsuario,
-  patronNombre,
-} from 'src/app/Validator/validaciones';
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ValidatorService } from 'src/app/shared/validator/validator.service';
 
 @Component({
   selector: 'app-registro',
@@ -12,25 +13,48 @@ import {
   styles: [],
 })
 export class RegistroComponent implements OnInit {
-  //función paravalidar password2 con password1
+  formulario: FormGroup = this.fb.group(
+    {
+      nombre: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.patronNombre),
+        ],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.emailPatron),
+        ],
+      ],
+      usuario: [
+        '',
+        [Validators.required, this.validatorService.obtenerUsuario],
+      ],
+      password1: ['', [Validators.required, Validators.minLength(6)]],
+      password2: ['', [Validators.required]],
+    },
+    {
+      validators: [
+        this.validatorService.passwordIguales('password1', 'password2'),
+      ],
+    }
+  );
 
-  formulario: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.pattern(patronNombre)]],
-    email: ['', [Validators.required, Validators.pattern(emailPatron)]],
-    usuario: ['', [Validators.required, obtenerUsuario]],
-    password1: ['', [Validators.required]],
-    password2: ['', [Validators.required]],
-  });
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private validatorService: ValidatorService
+  ) {}
 
   ngOnInit(): void {
     this.formulario.reset({
-      nombre: 'Pedro Rodriguez',
-      email: 'correo@correo.com',
+      nombre: '',
+      email: '',
       usuario: '',
-      password1: 'password',
-      password2: 'password',
+      password1: '',
+      password2: '',
     });
   }
 
@@ -45,5 +69,9 @@ export class RegistroComponent implements OnInit {
   validarFormulario() {
     console.log(this.formulario.value);
     this.formulario.markAllAsTouched();
+    this.formulario.reset();
   }
+
+  //función para validar la password2
+  validarPassword2(password1: FormControl) {}
 }

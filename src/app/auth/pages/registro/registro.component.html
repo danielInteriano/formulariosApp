@@ -65,7 +65,9 @@
             placeholder="Password del usuario"
             formControlName="password1"
           />
-          <span class="form-text text-danger">La contraseña no es válida</span>
+          <span class="form-text text-danger" *ngIf="validarCampo('password1')"
+            >La contraseña debe tener 6 caracteres.</span
+          >
         </div>
       </div>
 
@@ -79,14 +81,16 @@
             placeholder="Confirmar el password"
             formControlName="password2"
           />
-          <span class="form-text text-danger">El password no coinciden.</span>
+          <span class="form-text text-danger" *ngIf="validarCampo('password2')"
+            >Las contraseñas no coinciden.</span
+          >
         </div>
       </div>
 
       <!--Botón enviar-->
       <div class="row">
         <div class="col">
-          <button class="btn btn-primary float-end" tabindex="submit">
+          <button class="btn btn-primary float-end" type="submit">
             Crear usuario
           </button>
         </div>
